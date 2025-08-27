@@ -1,1 +1,18 @@
-[]
+[
+    {
+      "id": 1,
+      "name": "selling burritos",
+      "projectStage": "Design",
+      "responsible": "internal",
+      "potentialRevenue": 1000,
+      "priceQuotation": null,
+      "priceOutsourcing": null,
+      "workOrderGenerated": false,
+      "workOrderNumber": "",
+      "customizedScriptRequest": false,
+      "customizedScriptNumber": "",
+      "demandFormGenerated": false,
+      "comments": "",
+      "tasks": []
+    }
+  ]

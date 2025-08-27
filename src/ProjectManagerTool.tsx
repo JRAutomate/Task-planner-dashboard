@@ -45,6 +45,8 @@ const ProjectGanttChart = () => {
     loadData();
   }, []);
 
+
+
   // Add browser close warning for unsaved changes
   useEffect(() => {
     const handleBeforeUnload = (e: BeforeUnloadEvent) => {
@@ -327,8 +329,12 @@ const ProjectGanttChart = () => {
   const handleAddProject = () => {
     if (!newProject.name) return;
 
+    // Generate a unique project ID starting from 1
+    const allProjectIds = projects.map(p => p.id).filter(id => id !== null && id !== undefined);
+    const nextProjectId = allProjectIds.length > 0 ? Math.max(...allProjectIds) + 1 : 1;
+
     const project = {
-      id: Math.max(...projects.map(p => p.id)) + 1,
+      id: nextProjectId,
       ...newProject,
       tasks: []
     };
@@ -378,6 +384,26 @@ const ProjectGanttChart = () => {
     setEditingProject(null);
   };
 
+  const handleDeleteProject = () => {
+    if (!editingProject) return;
+    
+    const confirmed = window.confirm(`Are you sure you want to delete the project "${editingProject.name}"? This action cannot be undone and will also delete all associated tasks.`);
+    
+    if (confirmed) {
+      const updatedProjects = projects.filter(project => project.id !== editingProject.id);
+      setProjects(updatedProjects);
+      saveProjects(updatedProjects);
+      
+      // Update priority tasks if they're currently displayed
+      if (showTodayTasks) {
+        getTodayTasks();
+      }
+      
+      setEditingProject(null);
+      console.log(`Project "${editingProject.name}" deleted successfully`);
+    }
+  };
+
   const getStatusColor = (status: string) => {
     const colors: Record<string, string> = {
       'completed': 'bg-green-500',
@@ -417,6 +443,8 @@ const ProjectGanttChart = () => {
       <Building2 className="w-4 h-4 text-purple-500" /> : 
       <Building2 className="w-4 h-4 text-blue-500" />;
   };
+
+
 
   const startDate = new Date('2025-08-15');
   const endDate = new Date('2025-10-31');
@@ -568,13 +596,14 @@ const ProjectGanttChart = () => {
             Priority Tasks
           </button>
           <button
-            onClick={exportCurrentDataToJSON}
+            onClick={() => exportCurrentDataToJSON(projects)}
             className="flex items-center gap-2 px-4 py-2 bg-orange-600 text-white rounded hover:bg-orange-700"
             title="Export current data to JSON files for manual replacement"
           >
             <Save className="w-4 h-4" />
             Export to JSON
           </button>
+
           <button
             onClick={async () => {
               // Create a PDF export of the Gantt chart
@@ -676,7 +705,7 @@ const ProjectGanttChart = () => {
               if (confirmed) {
                 try {
                   // Auto-export data before closing
-                  await exportCurrentDataToJSON();
+                  await exportCurrentDataToJSON(projects);
                   // Small delay to ensure export completes
                   setTimeout(() => {
                     window.close();
@@ -1251,22 +1280,29 @@ const ProjectGanttChart = () => {
                 />
               </div>
             </div>
-            <div className="mt-6 flex gap-2">
-              <button
-                onClick={handleSaveEditProject}
-                className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
-              >
-                <Save className="w-4 h-4" />
-                Save Changes
-              </button>
-              <button
-                onClick={() => setEditingProject(null)}
-                className="flex items-center gap-2 px-4 py-2 bg-gray-600 text-white rounded hover:bg-gray-700"
-              >
-                <X className="w-4 h-4" />
-                Cancel
-              </button>
-            </div>
+                         <div className="mt-6 flex gap-2">
+               <button
+                 onClick={handleSaveEditProject}
+                 className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+               >
+                 <Save className="w-4 h-4" />
+                 Save Changes
+               </button>
+               <button
+                 onClick={handleDeleteProject}
+                 className="flex items-center gap-2 px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
+               >
+                 <X className="w-4 h-4" />
+                 Delete Project
+               </button>
+               <button
+                 onClick={() => setEditingProject(null)}
+                 className="flex items-center gap-2 px-4 py-2 bg-gray-600 text-white rounded hover:bg-gray-700"
+               >
+                 <X className="w-4 h-4" />
+                 Cancel
+               </button>
+             </div>
           </div>
         </div>
       )}

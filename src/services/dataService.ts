@@ -86,8 +86,10 @@ export const saveAdditionalTasks = async (tasks: Task[]): Promise<void> => {
 export const loadProjectsFromStorage = (): Project[] => {
   try {
     const stored = localStorage.getItem('projects');
+    console.log('Raw localStorage data:', stored);
     if (stored) {
       const projects = JSON.parse(stored);
+      console.log('Parsed projects from localStorage:', projects);
       return projects.map((project: any) => ({
         ...project,
         tasks: project.tasks.map((task: any) => ({
@@ -101,6 +103,7 @@ export const loadProjectsFromStorage = (): Project[] => {
   } catch (error) {
     console.error('Error loading from localStorage:', error);
   }
+  console.log('No projects found in localStorage, returning empty array');
   return [];
 };
 
@@ -123,17 +126,25 @@ export const loadAdditionalTasksFromStorage = (): Task[] => {
 };
 
 // Manual export function - only when user clicks "Export to JSON"
-export const exportCurrentDataToJSON = async (): Promise<void> => {
+export const exportCurrentDataToJSON = async (currentProjects?: any[]): Promise<void> => {
   try {
-    const projects = loadProjectsFromStorage();
+    // Use provided projects if available, otherwise load from storage
+    const projects = currentProjects || loadProjectsFromStorage();
     const tasks = loadAdditionalTasksFromStorage();
     
-    if (projects.length > 0) {
+    console.log('Exporting projects:', projects);
+    console.log('Exporting tasks:', tasks);
+    
+    if (projects && projects.length > 0) {
       await saveJSONFile('projects', projects);
+    } else {
+      console.log('No projects to export');
     }
     
-    if (tasks.length > 0) {
+    if (tasks && tasks.length > 0) {
       await saveJSONFile('additional-tasks', tasks);
+    } else {
+      console.log('No tasks to export');
     }
     
     console.log('All current data exported to JSON files');

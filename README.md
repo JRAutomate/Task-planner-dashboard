@@ -21,34 +21,44 @@ Traditional project management tools often lack the specific workflow customizat
 ## ✨ Key Features
 
 ### 🚀 Project Management
-- **Multi-stage project tracking** with customizable workflow stages
+- **Multi-stage project tracking** with customizable workflow stages:
+  - Planning → Design → Development → Testing → Deployment → Complete
 - **Revenue and cost monitoring** (quotations, outsourcing costs, work orders)
 - **Responsible party assignment** (internal teams vs. outsourced)
 - **Project lifecycle management** from potential to completion
+- **Project deletion** with confirmation and associated task cleanup
+- **Automatic ID generation** starting from 1 for new projects
 
 ### 📋 Task Management
 - **Intelligent priority scoring** algorithm based on deadlines and business rules
 - **Task status tracking** (planned, in progress, waiting, delayed, completed, closed)
 - **Priority bonus system** for critical tasks requiring immediate attention
 - **Comment and documentation** support for task details
+- **Task editing and deletion** with project association tracking
 
 ### 📊 Visual Dashboard
 - **Interactive Gantt chart** with timeline visualization
 - **Project categorization** (Potential, In Progress, Archived)
 - **Priority task overview** showing top 10 critical tasks
 - **Responsive design** with modern UI components
+- **Custom company logo integration** in the top-left corner
+- **Professional color-coded status indicators**
 
 ### 💾 Data Management
 - **Local storage persistence** for offline work
 - **JSON export/import** for data backup and sharing
 - **PDF report generation** for stakeholder presentations
 - **Data integrity protection** with unsaved changes warnings
+- **Enhanced export functionality** that captures current localStorage state
+- **Automatic data validation** and error handling
 
 ### 🎨 User Experience
 - **Modern, responsive interface** built with Tailwind CSS
 - **Intuitive navigation** between project sections
 - **Real-time updates** and live data synchronization
 - **Professional styling** suitable for business environments
+- **Streamlined button layout** with essential functions only
+- **Improved form labels** for better clarity (e.g., "Request" instead of "Customized Script Request")
 
 ## 🛠️ Technology Stack
 
@@ -101,17 +111,25 @@ data/                      # Sample data files
 └── additional-tasks.json
 
 public/
-└── data/                  # Public data access
+├── data/                  # Public data access
+└── logo(2).png           # Company logo file
 ```
 
 ## 🔧 Customization
 
 The application is designed for easy customization of business-specific elements:
 
-- **Project Stages**: Modify the workflow stages to match your business process
-- **Responsible Parties**: Update team and vendor labels
+- **Project Stages**: Modified workflow stages: Planning, Design, Development, Testing, Deployment, Complete
+- **Responsible Parties**: Updated labels (internal vs. outsourced)
 - **Currency**: Change to your local currency symbol
-- **UI Labels**: Customize button text and field labels for your terminology
+- **UI Labels**: Simplified labels for better user experience
+- **Company Logo**: Easy integration of your company logo in the top-left corner
+
+### Logo Integration
+To add your company logo:
+1. Place your logo file in the `public/` folder
+2. Update the `src` attribute in `ProjectManagerTool.tsx` (around line 500)
+3. Adjust the size using Tailwind classes (currently `w-32 h-32`)
 
 ## 📊 Data Management
 
@@ -120,6 +138,7 @@ The application is designed for easy customization of business-specific elements
 2. Fill in project details (name, stage, responsible party, revenue)
 3. Configure additional options (work orders, scripts, demand forms)
 4. Save to add to your project portfolio
+5. **New projects automatically get sequential IDs starting from 1**
 
 ### Managing Tasks
 1. Click "Add New Task" button
@@ -127,6 +146,12 @@ The application is designed for easy customization of business-specific elements
 3. Set start/end dates and priority level
 4. Add comments and status information
 5. Tasks automatically appear in the Gantt chart
+
+### Project Management
+- **Edit Projects**: Click the eye icon (👁️) to view and edit project details
+- **Delete Projects**: Use the "Delete Project" button in the project details modal
+- **Project Stages**: Move projects between stages to track progress
+- **Responsible Parties**: Assign projects to internal teams or outsourced vendors
 
 ### Priority System
 The dashboard uses an intelligent algorithm to calculate task priority:
@@ -143,6 +168,8 @@ The dashboard uses an intelligent algorithm to calculate task priority:
 - **Data-Driven Decisions**: Priority scoring helps focus on high-impact activities
 - **Professional Reporting**: PDF exports for client and management presentations
 - **Offline Capability**: Work without internet connection with local data storage
+- **Streamlined Workflow**: Simplified project stages for better project progression tracking
+- **Enhanced Data Integrity**: Improved ID generation and data validation
 
 ## 🔒 Data Security
 
@@ -150,6 +177,7 @@ The dashboard uses an intelligent algorithm to calculate task priority:
 - **No Cloud Dependencies**: Your project information stays private
 - **Export Control**: You control when and how data is shared
 - **Backup Capability**: JSON export for data backup and recovery
+- **Data Validation**: Enhanced error handling and data integrity checks
 
 ## 🚀 Deployment Options
 
@@ -165,6 +193,25 @@ The dashboard uses an intelligent algorithm to calculate task priority:
 - Compatible with GitHub Pages, Netlify, Vercel, and other static hosts
 - No server-side requirements
 
+## 🆕 Recent Updates & Improvements
+
+### Enhanced Project Management
+- **Simplified Project Stages**: Streamlined workflow from 12 stages to 6 essential stages
+- **Improved Labels**: Better terminology for user understanding
+- **Delete Project Functionality**: Safe project deletion with confirmation dialogs
+- **Automatic ID Management**: Robust ID generation starting from 1
+
+### Better User Experience
+- **Custom Logo Integration**: Company branding in the top-left corner
+- **Streamlined Interface**: Removed unnecessary buttons for cleaner UI
+- **Enhanced Data Export**: Improved JSON export functionality
+- **Better Error Handling**: Comprehensive logging and validation
+
+### Data Integrity
+- **Enhanced Export**: Export function now captures current localStorage state
+- **Improved Validation**: Better handling of edge cases and data validation
+- **Automatic Cleanup**: Proper cleanup when deleting projects and tasks
+
 ## 🤝 Contributing
 
 This application is designed for business use and can be customized for specific organizational needs. The modular structure makes it easy to:
@@ -173,6 +220,7 @@ This application is designed for business use and can be customized for specific
 - Modify priority algorithms
 - Extend data models
 - Customize UI components
+- Integrate company branding
 
 ## 📄 License
 
