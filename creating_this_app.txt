@@ -1,0 +1,94 @@
+🚀 COMPREHENSIVE PROJECT CREATION PROMPT
+📋 PROJECT OVERVIEW
+Create a React-based project management dashboard application with TypeScript, featuring Gantt chart visualization, task management, and project tracking capabilities.
+🎯 CORE REQUIREMENTS
+Functional Requirements
+Project Management: Create, edit, delete projects with stages (potential, active, completed)
+Task Management: Add tasks with start/end dates, status tracking, and priority
+Gantt Chart Visualization: Interactive timeline view of projects and tasks
+Data Persistence: JSON file storage with localStorage fallback
+Export Functionality: PDF generation and JSON export
+Responsive Design: Mobile-friendly interface using Tailwind CSS
+Technical Requirements
+Frontend: React 19+ with TypeScript
+Styling: Tailwind CSS with custom components
+Build Tool: Create React App (CRA)
+Testing: Jest + React Testing Library
+PDF Generation: html2pdf.js integration
+��️ TECHNICAL SETUP
+1. Package Dependencies
+2. TypeScript Configuration (tsconfig.json)
+3. Tailwind CSS Configuration (tailwind.config.js)
+4. PostCSS Configuration (postcss.config.js)
+5. CSS Setup (src/index.css)
+�� PROJECT STRUCTURE
+🔧 IMPLEMENTATION CHECKLIST
+Phase 1: Project Setup
+[ ] Initialize React app with TypeScript
+[ ] Install and configure Tailwind CSS
+[ ] Set up project structure and routing
+[ ] Configure build scripts and testing
+Phase 2: Core Components
+[ ] Create TypeScript interfaces for Project and Task
+[ ] Implement ProjectManagerTool main component
+[ ] Build Project and Task forms
+[ ] Create Gantt chart visualization
+Phase 3: Data Management
+[ ] Implement dataService with JSON file handling
+[ ] Add localStorage fallback functionality
+[ ] Create export/import capabilities
+[ ] Add PDF generation feature
+Phase 4: UI/UX Enhancement
+[ ] Implement responsive design
+[ ] Add drag-and-drop functionality
+[ ] Create status indicators and icons
+[ ] Implement search and filtering
+Phase 5: Testing & Optimization
+[ ] Write unit tests for components
+[ ] Add integration tests
+[ ] Performance optimization
+[ ] Cross-browser compatibility
+✅ QUALITY CHECKS
+Code Quality
+[ ] TypeScript strict mode enabled
+[ ] ESLint configuration applied
+[ ] Consistent code formatting
+[ ] Proper error handling
+Functionality Testing
+[ ] Project CRUD operations work
+[ ] Task management functions properly
+[ ] Data persistence across sessions
+[ ] Export functionality generates correct files
+UI/UX Validation
+[ ] Responsive design on all screen sizes
+[ ] Accessibility standards met
+[ ] Consistent visual hierarchy
+[ ] Intuitive user interactions
+🔄 ITERATION PROCESS
+Development Cycle
+Plan: Define specific features for each iteration
+Build: Implement core functionality
+Test: Verify requirements are met
+Review: Gather feedback and identify improvements
+Refactor: Optimize code and enhance features
+Feedback Integration
+User testing after each major feature
+Performance monitoring and optimization
+Bug fixes and edge case handling
+Feature enhancement based on usage patterns
+🚨 CRITICAL CONSIDERATIONS
+Data Security
+Implement proper data validation
+Handle file uploads securely
+Protect against XSS attacks
+Validate JSON data integrity
+Performance
+Lazy load components when possible
+Optimize re-renders with React.memo
+Implement virtual scrolling for large datasets
+Cache frequently accessed data
+Browser Compatibility
+Test on Chrome, Firefox, Safari, Edge
+Ensure mobile responsiveness
+Handle offline scenarios gracefully
+Progressive enhancement approach
